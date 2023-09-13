@@ -12,6 +12,9 @@ const toHome = () => {
 const toLoja = () => {
   router.push('/lojas');
 };
+const toParcerias = () => {
+  router.push('/loginadm');
+};
 </script>
 
 
@@ -20,7 +23,7 @@ const toLoja = () => {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    
 
 }
 
@@ -142,14 +145,14 @@ body {
 <template>
   <body>
     <header class="header">
-    <a href="#" class="logo">
-        Henrique Melo E-commerce
-    </a>
+    
+    <button @click="toHome" type="button" class="logo">Henrique Melo E-commerce </button>
     
     <nav class="navbar">
         <button @click="toHome" type="button">Home </button>
-        <button @click="toCart" type="button">Carrinho</button>
-        <button @click="toLoja" type="button">Loja</button>
+        <button @click="toParcerias" type="button">Administração </button>
+        <button @click="toCart" type="button">Carrinho </button>
+        <button @click="toLoja" type="button">Loja </button>
     </nav>
 
   </header>

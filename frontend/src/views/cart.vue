@@ -1,58 +1,32 @@
-<script setup>
-import { useRouter } from 'vue-router';
-
-const router = useRouter();
-
-const toPayment = () => {
-  router.push('/meuscartoes');
-};
-</script>
-
-
-
-
 <template>
   <div class="checkout-page">
     <div class="payment-container">
       <h1 class="checkout-header">Checkout</h1>
       <div class="cart-items">
-        <!-- Product 1 -->
-        <div class="cart-item">
-          <img src="product-image.jpg" alt="Product Image" class="product-image">
+        <div class="cart-item" v-for="(item, index) in cartItems" :key="index">
+          <img :src="`product${index + 1}-image.jpg`" :alt="`Product Image ${index + 1}`" class="product-image">
           <div class="product-details">
-            <h2 class="product-name">Camisinha Hulk</h2>
-            <p class="product-price">$19.99</p>
-            <p class="product-quantity">Quantity: 2</p>
+            <h2 class="product-name">{{ item.name }}</h2>
+            <p class="product-price">${{ item.discountedPrice || item.price }}</p>
+            <p class="product-quantity">Quantity: {{ item.quantity }}</p>
           </div>
-          <button class="remove-button">Remove</button>
+          <button class="remove-button" @click="removeItem(index)">Remove</button>
         </div>
-
-        <!-- Product 2 -->
-        <div class="cart-item">
-          <img src="product2-image.jpg" alt="Product Image" class="product-image">
-          <div class="product-details">
-            <h2 class="product-name">Product 2</h2>
-            <p class="product-price">$29.99</p>
-            <p class="product-quantity">Quantity: 1</p>
-          </div>
-          <button class="remove-button">Remove</button>
-        </div>
-
-        <!-- Product 3 -->
-        <div class="cart-item">
-          <img src="product3-image.jpg" alt="Product Image" class="product-image">
-          <div class="product-details">
-            <h2 class="product-name">Product 3</h2>
-            <p class="product-price">$14.99</p>
-            <p class="product-quantity">Quantity: 3</p>
-          </div>
-          <button class="remove-button">Remove</button>
-        </div>
-        <!-- Repeat for additional products -->
       </div>
       <div class="cart-total">
+        <div class="coupon-container">
+          <label for="coupon-input">Enter Coupon Name:</label>
+          <input
+            type="text"
+            id="coupon-input"
+            v-model="couponName"
+            placeholder="Enter coupon name"
+          />
+          <button class="apply-button" @click="applyCoupon">Apply</button>
+          <button class="reset-button" @click="resetCart">Reset</button>
+        </div>
         <p class="total-text">Cart Total:</p>
-        <p class="total-amount">$114.94</p>
+        <p class="total-amount">${{ calculateCartTotal().toFixed(2) }}</p>
       </div>
       <button class="checkout-button" @click="toPayment">Payment options</button>
       <button class="checkout-button" @click="checkout">Proceed to Checkout</button>
@@ -60,8 +34,118 @@ const toPayment = () => {
   </div>
 </template>
 
+<script setup>
+import { ref } from 'vue';
+
+const cartItems = ref([
+  { name: 'Camisinha Hulk', price: 19.99, quantity: 2 },
+  { name: 'Product 2', price: 29.99, quantity: 1 },
+  { name: 'Product 3', price: 14.99, quantity: 3 },
+  // Add other cart items as needed
+]);
+
+const couponName = ref(''); // Store the entered coupon name
+const coupons = ref([]); // Coupons fetched from your database
+const selectedCoupon = ref(null); // Store the selected coupon
+
+const fetchCoupons = async () => {
+  try {
+    const response = await fetch('http://localhost:8000/cupom', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    if (response.ok) {
+      coupons.value = await response.json();
+    } else {
+      console.error('Failed to fetch coupons.');
+    }
+  } catch (error) {
+    console.error('Error while fetching coupons:', error);
+  }
+};
+
+const applyCoupon = () => {
+  selectedCoupon.value = coupons.value.find(coupon => coupon.nome === couponName.value);
+
+  if (selectedCoupon.value) {
+    const discount = selectedCoupon.value.desconto;
+    const cartTotal = calculateCartTotal();
+    const discountAmount = (cartTotal * discount) / 100;
+    const newTotal = cartTotal - discountAmount;
+
+    // Update the cart total with the coupon discount
+    cartItems.value.forEach(item => {
+      item.discountedPrice = item.price - (item.price * discount) / 100;
+    });
+
+    alert(`Coupon applied! New total: $${newTotal.toFixed(2)}`);
+  } else {
+    alert('Coupon not found or invalid.');
+  }
+};
+
+const calculateCartTotal = () => {
+  let total = 0;
+  for (const item of cartItems.value) {
+    total += item.discountedPrice || item.price;
+  }
+  return total;
+};
+
+fetchCoupons(); // Fetch coupons from your database
+const resetCart = () => {
+  // Reset cart items to their original prices
+  cartItems.value.forEach(item => {
+    item.discountedPrice = null;
+  });
+
+  // Clear the coupon code input field
+  couponName.value = '';
+
+  // Show a message or perform any other desired actions
+  alert('Cart has been reset to original prices.');
+};
+</script>
+
+
 
 <style scoped>
+.coupon-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-right: 10px;
+}
+
+#coupon-input {
+  padding: 5px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 200px;
+}
+
+.apply-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.apply-button:hover {
+  background-color: #45a049;
+}
 .checkout-page {
   width: 100%;
   height: 100vh;

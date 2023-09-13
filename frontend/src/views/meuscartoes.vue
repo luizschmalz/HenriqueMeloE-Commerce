@@ -1,5 +1,5 @@
 <script setup>
-  
+    import Navegacao from '../components/navegacao.vue';
     import { useRouter } from 'vue-router';
 
     const router = useRouter();
@@ -25,59 +25,97 @@
 
 
 <template>
-    <div class="credit-card-list">
-      <h1 class="page-title">Credit Cards</h1>
-      <ul>
-        <li v-for="(card, index) in creditCards" :key="index">
-          <div class="credit-card-item">
-            <div class="credit-card-info">
-              <span class="credit-card-name">{{ card.nome }}</span>
-              <span class="credit-card-number">
-                **** **** **** {{ card.numero_cartao.slice(-4) }}
-              </span>
-            </div>
+  <Navegacao></Navegacao>
+  <div class="credit-card-list">
+    <h1 class="page-title">Credit Cards</h1>
+    <ul>
+      <li v-for="(card, index) in creditCards" :key="index">
+        <div class="credit-card-item">
+          <div class="credit-card-info">
+            <span class="credit-card-name">{{ card.nome }}</span>
+            <span class="credit-card-number">
+              **** **** **** {{ card.numero_cartao.slice(-4) }}
+            </span>
           </div>
-        </li>
-      </ul>
-    <div class="add"><button class="botao" @click="toPayment">Adicionar Cartão</button></div>
+          <div class="credit-card-actions">
+            <button class="delete-button" @click="deleteCreditCard(card.numero_cartao)">Delete</button>
+            <button class="select-button" @click="selectCreditCard(card)">Select</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div class="add">
+      <button class="botao" @click="toPayment">Adicionar Cartão</button>
     </div>
-  </template>
+  </div>
+</template>
+
+
   
   <script>
-  export default {
-    data() {
-      return {
-        creditCards: [],
-      };
-    },
-    mounted() {
-      // Fetch credit card data from the server using a GET request
-      this.fetchCreditCards();
-    },
-    methods: {
-      async fetchCreditCards() {
-        try {
-          const response = await fetch('http://localhost:8000/cartoes', {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          });
-          if (response.ok) {
-            const data = await response.json();
-            this.creditCards = data;
-          } else {
-            console.error('Failed to fetch credit cards.');
-          }
-        } catch (error) {
-          console.error('Error while fetching credit cards:', error);
+export default {
+  data() {
+    return {
+      creditCards: [],
+    };
+  },
+  mounted() {
+    // Fetch credit card data from the server using a GET request
+    this.fetchCreditCards();
+  },
+  methods: {
+    async fetchCreditCards() {
+      try {
+        const response = await fetch('http://localhost:8000/cartoes', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          this.creditCards = data;
+        } else {
+          console.error('Failed to fetch credit cards.');
         }
-      },
+      } catch (error) {
+        console.error('Error while fetching credit cards:', error);
+      }
     },
-  };
-  </script>
+    async deleteCreditCard(numeroCartao) {
+      try {
+        const response = await fetch(`http://localhost:8000/cartoes/${numeroCartao}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        if (response.ok) {
+          // Remove the deleted card from the list
+          this.creditCards = this.creditCards.filter(card => card.numero_cartao !== numeroCartao);
+        } else {
+          console.error('Failed to delete credit card.');
+        }
+      } catch (error) {
+        console.error('Error while deleting credit card:', error);
+      }
+    },
+    toPayment() {
+      this.$router.push('/cartoes');
+    },
+  },
+};
+</script>
   
   <style scoped>
+  .page-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+  }
   .add{
     display: flex;
     text-align: center;

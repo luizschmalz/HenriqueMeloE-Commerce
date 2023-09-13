@@ -11,41 +11,50 @@
             <!-- Team Member 1 -->
             <div class="integrante">
                 <img src="../components/imagens/minha foto.jpg" alt="">
-                <h1>Ian Gabriel<br><span>Braga Trinta</span></h1>
-                <a href="https://www.instagram.com/ianbraga_/" target="_blank">Sobre mim</a>
+                <div class="info-container">
+                    <h1>Ian Gabriel<br><span>Braga Trinta</span></h1>
+                    <a href="https://www.instagram.com/ianbraga_/" target="_blank">Sobre mim</a>
+                </div>
             </div>
-            
         </div>
         <div class="containerequipe">
                     <!-- Team Member 1 -->
                     <div class="integrante">
                         <img src="../components/imagens/jiboia.jpg" alt="">
+                        <div class="info-container">
                         <h1>Caio Possidio<br><span>A lenda</span></h1>
                         <a href="https://www.instagram.com/possidiocaio/" target="_blank">Sobre mim</a>
+                        </div>
                     </div>
                 </div>
         <div class="containerequipe">
                     <!-- Team Member 1 -->
                     <div class="integrante">
                         <img src="../components/imagens/luiz.jpg" alt="">
+                        <div class="info-container">
                         <h1>Luiz Eduardo Freitas<br><span>Von Schmalz</span></h1>
                         <a href="https://www.instagram.com/luizschmalz/" target="_blank">Sobre mim</a>
+                    </div>
                     </div>
                 </div>
         <div class="containerequipe">
                     <!-- Team Member 1 -->
                     <div class="integrante">
                         <img src="../components/imagens/tbroq.webp" alt="">
+                        <div class="info-container">
                         <h1>Luiz Eduardo Freitas<br><span>Von Schmalz</span></h1>
                         <a href="https://www.instagram.com/luizschmalz/" target="_blank">Sobre mim</a>
+                    </div>
                     </div>
                 </div>
         <div class="containerequipe">
                     <!-- Team Member 1 -->
                     <div class="integrante">
                         <img src="../components/imagens/brenda.webp" alt="">
+                        <div class="info-container">
                         <h1>Luiz Eduardo Freitas<br><span>Von Schmalz</span></h1>
                         <a href="https://www.instagram.com/luizschmalz/" target="_blank">Sobre mim</a>
+                    </div>
                     </div>
                 </div>
         <div class="textoequipe">  
@@ -190,8 +199,17 @@
     border-radius: 50%;
     z-index: 1;
 }
+.integrante .info-container {
+    display: none;
+}
+
+/* Show the info-container on hover */
+.integrante:hover .info-container {
+    display: block;
+}
     
 
 
 </style>
+  
   

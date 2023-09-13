@@ -1,28 +1,23 @@
 <script setup>
-    import Navegacao from '../components/navegacao.vue';
-    import { useRouter } from 'vue-router';
+import { ref } from 'vue';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 
-    const router = useRouter();
+const store = useStore();
+const router = useRouter();
 
-    const toPayment = () => {
-        router.push('/cartoes');
-    };
+const selectCreditCard = (card) => {
+  console.log('Selecting credit card:', card);
+
+  // Commit the mutation to set the selected credit card in the store
+  store.commit('creditCards/setSelectedCard', card);
+  router.push('/cart'); // Navigate to the cart page
+};
+
+const toPayment = () => {
+  router.push('/cartoes');
+};
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <template>
   <Navegacao></Navegacao>

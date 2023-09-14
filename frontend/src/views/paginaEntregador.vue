@@ -1,5 +1,5 @@
 <template>
-  <Navegacao/>
+  <Navegacao :email="email" />
   <div class="pagina-entregador">
     <div class="entregador-box">
       <h1 class="page-title">Detalhes do Entregador</h1>
@@ -47,7 +47,7 @@ export default {
 
   async mounted() {
   const router = useRouter();
-  const email = this.$route.params.email; 
+  const email = this.$route.params.email || this.$route.params.id;
 
   if (email) {
     try {

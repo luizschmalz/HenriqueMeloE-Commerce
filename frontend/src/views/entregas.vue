@@ -126,8 +126,6 @@ const formData = ref({
   emailEntregador: '',
 });
 
-const emailEntregador = formData.value.emailEntregador;
-
 const Criar = async () => {
   const response = await fetch('http://localhost:8000/entregas', {
     method: 'POST',
@@ -143,7 +141,7 @@ const Criar = async () => {
   }
   else {
     alert(JSON.stringify(formData.value));
-    this.$router.push({ name: 'paginaEntregador', params: { emailEntregador } });
+    router.push('/');
   }
 };
 </script>

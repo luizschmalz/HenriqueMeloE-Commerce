@@ -1,80 +1,35 @@
 <template>
-    <header class="header">
-      <button @click="toHome" type="button" class="logo">Henrique Melo E-commerce</button>
-  
-      <div class="navbar">
-        <div class="dropdown">
-          <button @click="toggleDropdown" class="dropdown-btn">Entregas</button>
-          <div v-show="showDropdown" class="dropdown-content">
-            <router-link v-for="entrega in entregas" :to="'/paginaEntregador/' + entrega.emailEntregador" :key="entrega.id">
-              {{ entrega.nomeProduto }}
-            </router-link>
-          </div>
+  <header class="header">
+    <button @click="toHome" type="button" class="logo">Henrique Melo E-commerce</button>
+
+    <div class="navbar">
+      <div class="dropdown">
+        <button @click="toggleDropdown" class="dropdown-btn">Entregas</button>
+        <div v-show="showDropdown" class="dropdown-content">
+          <router-link :to="`/entregaEntregador/${email}`">Detalhes das Entregas</router-link>
         </div>
       </div>
-    </header>
-  </template>
-  
-  <script setup>
-  import { ref, onMounted } from 'vue';
-  import { useRouter } from 'vue-router';
-  
-  const showDropdown = ref(false);
-  const entregas = ref([]);
-  const router = useRouter();
-  
-  const toHome = () => {
-    router.push('/');
-  };
-  
-  const toggleDropdown = () => {
-    showDropdown.value = !showDropdown.value;
-  };
-  </script>
-  
-  <script>
-  import { onMounted, ref } from 'vue';
-  import { useRouter } from 'vue-router';
-  
-  export default {
-    setup() {
-      const showDropdown = ref(false);
-      const entregas = ref([]);
-      const router = useRouter();
-  
-      const toHome = () => {
-        router.push('/');
-      };
-  
-      const toggleDropdown = () => {
-        showDropdown.value = !showDropdown.value;
-      };
-  
-      onMounted(async () => {
-        try {
-          const emailEntregador = router.currentRoute.value.params.email;
-          const response = await fetch(`http://localhost:8000/entregas/${emailEntregador}`);
-          if (response.ok) {
-            const data = await response.json();
-            entregas.value = data;
-          } else {
-            console.error('Error fetching entregas data.');
-          }
-        } catch (error) {
-          console.error('Error fetching entregas data:', error);
-        }
-      });
-  
-      return {
-        showDropdown,
-        toHome,
-        toggleDropdown,
-        entregas,
-      };
-    },
-  };
-  </script>
-  
+    </div>
+  </header>
+</template>
+
+<script setup>
+import { ref, defineProps } from 'vue';
+import { useRouter } from 'vue-router';
+
+const { email } = defineProps(['email']);
+const router = useRouter();
+const showDropdown = ref(false);
+
+const toHome = () => {
+  router.push('/');
+};
+
+const toggleDropdown = () => {
+  showDropdown.value = !showDropdown.value;
+};
+</script>
+ 
   
   <style scoped>
 *{
@@ -91,8 +46,6 @@ body {
   max-height: 100%; 
   background: url('../components/imagens/cool-background.png');
   
-  
-
 }
 
 .header{

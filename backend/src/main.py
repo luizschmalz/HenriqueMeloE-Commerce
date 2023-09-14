@@ -10,6 +10,8 @@ from fastapi.responses import JSONResponse
 from passlib.context import CryptContext 
 from sqlalchemy.orm import declarative_base
 
+
+# abrindo o app com o FastAPI
 app = FastAPI()
 
 # CORS middleware configuration
@@ -26,11 +28,11 @@ engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
-# Function to create the database tables
+# criando o banco de dados
 def criar_banco():
     Base.metadata.create_all(bind=engine)
 
-# Dependency to get a database session
+# Função para criar a sessão do banco de dados
 def get_db():
     db = SessionLocal()
     try:
@@ -39,6 +41,8 @@ def get_db():
         db.close()
 
 
+
+# ------------------------- Classes BaseModel e Classes SQL ------------------------- #
 
 class credit_card(BaseModel):
     nome: str
@@ -147,19 +151,15 @@ class LoginLojas(BaseModel):
     email: str
     senha: str
 
-
-
 pwd_content = CryptContext(schemes=['bcrypt'])
-
 
 def gerarhash(senha):
     return pwd_content.hash(senha)
-
 def verificarsenha(senha, hash):
     return pwd_content.verify(senha, hash)
 
 
-    
+# ------------------------- Repositórios ------------------------- #
 class RepositorioEntregadores():
     def __init__(self, db: Session):
         self.db = db
@@ -205,22 +205,9 @@ class RepositorioEntregadores():
     
     def relatorio(self):
         return self.db.query(Entregadores).all()
+
+# ------------------------- Repositório Cartão ------------------------- #
        
-    
-
-# Function to create the database tables
-def criar_banco():
-    Base.metadata.create_all(bind=engine)
-
-# Dependency to get a database session
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
-
 class RepositorioCartao():
     def __init__(self, db: Session):
         self.db = db
@@ -257,13 +244,10 @@ class RepositorioCartao():
     
     def relatorio(self):
         return self.db.query(cartao_credito).all()
-    
-    
-#class cupom_desconto(Base):
-    #__tablename__ = 'cupom_desconto'
-    #nome = Column(String, primary_key = True, index = True)
-    #desconto = Column(Integer)
-    
+
+
+# ------------------------- Repositório Cupom ------------------------- #
+       
 class RepositorioCupoms():
     def __init__(self, db: Session):
         self.db = db
@@ -301,6 +285,8 @@ class RepositorioCupoms():
     def relatorio(self):
         return self.db.query(cupom_desconto).all()
 
+# ------------------------- Repositório Lojas ------------------------- #        
+
 class RepositorioLojas():
     def __init__(self, db: Session):
         self.db = db
@@ -334,6 +320,8 @@ class RepositorioLojas():
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Cupom não encontrado")
 
 
+# ------------------------- Repositório Entregas ------------------------- #
+
 class RepositorioEntregas():
     def __init__(self, db: Session):
         self.db = db
@@ -365,8 +353,13 @@ class RepositorioEntregas():
         return self.db.query(Entregas).all()
 
 
+# ------------------------- Rotas ------------------------- #
+
+# Criando o banco de dados
+
 criar_banco()
 
+# ------------------------ Rotas /cartoes ------------------------ #
 @app.post('/cartoes', response_model=credit_card, status_code=status.HTTP_201_CREATED)
 def criar_cartao(card: credit_card, db: Session = Depends(get_db)):
     card_temp = RepositorioCartao(db).criar(card)
@@ -401,6 +394,8 @@ def atualizar_cartao_existente(numero_cartao: str, card: credit_card, db: Sessio
     return JSONResponse(content=response_message, status_code=status.HTTP_201_CREATED)
 
 
+# ------------------------ Rotas /cupom ------------------------ #
+
 @app.post('/cupom', response_model=discount_coupom, status_code=status.HTTP_201_CREATED)
 def cadastro_cupom(cupom: discount_coupom, db: Session = Depends(get_db)):
     cupom_temp = RepositorioCupoms(db).criar(cupom)
@@ -424,6 +419,8 @@ def atualizar_cupom_existente(nome: str, cupom: discount_coupom, db: Session = D
     response_message = {"message": f"Cupom de nome {nome} teve seu desconto alterado para {cupom.desconto}"}
     return JSONResponse(content=response_message, status_code=status.HTTP_201_CREATED)
 
+
+# ------------------------ Rotas /lojas ------------------------ #
 
 @app.delete('/cupom/{nome}', status_code=status.HTTP_204_NO_CONTENT)
 def deletar_cupom(nome: str, db: Session = Depends(get_db)):

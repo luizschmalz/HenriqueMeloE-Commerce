@@ -1,4 +1,4 @@
-import axios from 'axios';
+/*import axios from 'axios';
 
 const apiClient = axios.create({
   baseURL: 'https://pokeapi.co/api/v2/',
@@ -11,4 +11,6 @@ export default {
     return apiClient.get(`pokemon/${id}`);
   },
   // Outros métodos relacionados aos Pokémons
-};
+};*/
+
+// não apagando apenas por lembrança sobre como estudei a api do pokemon (;

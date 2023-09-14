@@ -64,17 +64,7 @@
 
   
 <style scoped>
-*{
-    margin: 0;
-    padding: 0;
-    font-family: 'ZZYZX', sans-serif;
-    box-sizing: border-box;
 
-}
-@font-face {
-    font-family: ZZYZX;
-    src: url(../components/fonts/ZZYZX.TTF);
-}
 .textoequipe{
     color: #000000;
     font-size: 32px;

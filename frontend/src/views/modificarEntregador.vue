@@ -1,79 +1,84 @@
 <template>
+  <Navegacao />
   <div class="modify-page">
-      <div class="modify-form">
-        <h1 class="page-title">Modifique seus dados</h1>
-        <form @submit.prevent="modifying">
-          <div class="form-group">
-            <label for="nome">Nome:</label>
-            <input
-              type="text"
-              id="nome"
-              name="nome"
-              v-model="formData.nome"
-              :placeholder="entregador.nome"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="cpf">CPF:</label>
-            <input
-              type="text"
-              id="cpf"
-              name="cpf"
-              v-model="formData.cpf"
-              :placeholder="entregador.cpf"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="telefone">Telefone:</label>
-            <input
-              type="text"
-              id="telefone"
-              name="telefone"
-              v-model="formData.telefone"
-              :placeholder="entregador.telefone"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="veiculo">Veiculo:</label>
-            <input
-              type="text"
-              id="veiculo"
-              name="veiculo"
-              v-model="formData.veiculo"
-              :placeholder="entregador.veiculo"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="placa">Placa:</label>
-            <input
-              type="text"
-              id="placa"
-              name="placa"
-              v-model="formData.placa"
-              :placeholder="entregador.placa"
-              required
-            />
-          </div>
-          <button type="submit" class="alterar-button" @click="alterar(entregador.email)">Alterar</button>
-          <button type="submit" class="voltar-button" @click="voltar(entregador.email)">Voltar</button>
-        </form>
-      </div>
+    <div class="modify-form">
+      <h1 class="page-title">Modifique seus dados</h1>
+      <form @submit.prevent="modifying">
+        <div class="form-group">
+          <label for="nome">Nome:</label>
+          <input
+            type="text"
+            id="nome"
+            name="nome"
+            v-model="formData.nome"
+            placeholder="Digite seu nome"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="cpf">CPF:</label>
+          <input
+            type="text"
+            id="cpf"
+            name="cpf"
+            v-model="formData.cpf"
+            placeholder="Digite seu cpf"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="telefone">Telefone:</label>
+          <input
+            type="text"
+            id="telefone"
+            name="telefone"
+            v-model="formData.telefone"
+            placeholder="Digite seu numero de telefone"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="veiculo">Veiculo:</label>
+          <input
+            type="text"
+            id="veiculo"
+            name="veiculo"
+            v-model="formData.veiculo"
+            placeholder="Digite o tipo do veiculo"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="placa">Placa:</label>
+          <input
+            type="text"
+            id="placa"
+            name="placa"
+            v-model="formData.placa"
+            placeholder="Digite sua placa"
+            required
+          />
+        </div>
+        <div class="buttons-container">
+          <button type="submit" class="alterar-button" @click="alterar()">Alterar</button>
+        </div>
+      </form>
     </div>
+  </div>
 </template>
 
 <script>
-import { onMounted, ref } from 'vue';
+import Navegacao from '../components/navegacao.vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 export default {
+  components: {
+    Navegacao,
+  },
   data() {
     return {
-      entregador: {
-        email: '',
+      formData: {
         nome: '',
         cpf: '',
         telefone: '',
@@ -82,36 +87,40 @@ export default {
       },
     };
   },
+  methods: {
+    async alterar() {
+      const email = this.getEmailFromRoute();
+      try {
+        const response = await fetch(`http://localhost:8000/entregadores/${email}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(this.formData),
+        });
 
-  async mounted() {
-  const router = useRouter();
-  const email = this.$route.params.email; 
-
-  if (email) {
-    try {
-      const response = await fetch(`http://localhost:8000/entregadores/${email}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        this.entregador = data;
-      } else {
-        console.error('Erro ao tentar recuperar dados do entregador.');
+        if (!response.ok) {
+          const responseData = await response.json();
+          alert(`${responseData.detail}`);
+        } else {
+          alert(JSON.stringify(this.formData));
+          this.$router.push({ name: 'paginaEntregador', params: { email } });
+        }
+      } catch (error) {
+        console.error('Error:', error);
       }
-    } catch (error) {
-      console.error('Erro na tentativa de recuperar dadoas do entregador:', error);
+    },
+  },
+  computed: {
+    getEmailFromRoute() {
+      return this.$route.params.email;
     }
-  }
   },
 };
 </script>
 
 <style scoped>
-.login-page {
+.modify-page {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -125,7 +134,7 @@ export default {
   color: #333;
 }
 
-.login-form {
+.modify-form {
   background-color: #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -154,22 +163,25 @@ input[type='text'] {
   background-color: #f0f0f0;
 }
 
-.alterar-button,
-.voltar-button {
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.alterar-button {
   background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 5px;
-  padding: 10px;
+  padding: 10px 20px;
   font-size: 18px;
   cursor: pointer;
   width: 100%;
   transition: background-color 0.3s ease;
 }
 
-.alterar-button:hover,
-.voltar-button:hover {
+.alterar-button:hover {
   background-color: #0056b3;
 }
-
 </style>

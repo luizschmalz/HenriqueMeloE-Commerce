@@ -8,6 +8,7 @@ import loginEntregador from '../views/loginEntregador.vue'
 import paginaEntregador from '../views/paginaEntregador.vue'
 import modificarEntregador from '../views/modificarEntregador.vue'
 import entregas from '../views/entregas.vue'
+import entregaEntregador from '../views/entregaEntregador.vue'
 import meuscartoes from '../views/meuscartoes.vue'
 import login from '../views/login.vue'
 import cadastro from '../views/cadastro.vue'
@@ -66,6 +67,11 @@ const router = createRouter({
             path: '/entregas',
             name: 'entregas',
             component: entregas
+        },
+        {
+            path: '/entregaEntregador/:email',
+            name: 'entregaEntregador',
+            component: entregaEntregador,
         },
         {
             path: '/meuscartoes',

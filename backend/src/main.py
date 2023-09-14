@@ -357,8 +357,8 @@ class RepositorioEntregas():
         self.db.refresh(db_entrega)
         return db_entrega
     
-    def relatorio(self):
-        return self.db.query(Entregas).all()
+    def relatorio(self, emailEntregador: str):
+        return self.db.query(Entregas).filter(Entregas.emailEntregador == emailEntregador).all()
 
 
 # ------------------------- Rotas ------------------------- #
@@ -428,15 +428,15 @@ def atualizar_cupom_existente(nome: str, cupom: discount_coupom, db: Session = D
     return JSONResponse(content=response_message, status_code=status.HTTP_201_CREATED)
 
 
-# ------------------------ Rotas /lojas ------------------------ #
-
 @app.delete('/cupom/{nome}', status_code=status.HTTP_204_NO_CONTENT)
 def deletar_cupom(nome: str, db: Session = Depends(get_db)):
     repo = RepositorioCupoms(db)
     repo.remover(nome)
     response_message = {"message": f"Cupom de nome {nome} deletado com sucesso"}
     return JSONResponse(content=response_message, status_code=status.HTTP_201_CREATED)
-    
+
+
+# ------------------------ Rotas /lojas ------------------------ #
 
 @app.post('/lojas', status_code=status.HTTP_201_CREATED)
 def criar_lojas(lojas: Lojas, db: Session = Depends(get_db)):
@@ -456,6 +456,7 @@ def listar_lojas(db: Session = Depends(get_db)):
     lojas = RepositorioLojas(db).listar() 
     return lojas
 
+# ------------------------ Rotas /Entregadores ------------------------ #
 
 @app.post('/entregadores', response_model=Entregador, status_code=status.HTTP_201_CREATED)
 def criar_entregador(entregador: Entregador, db: Session = Depends(get_db)):
@@ -489,19 +490,21 @@ def deletar_entregador(email: str, db: Session = Depends(get_db)):
     response_message = {"detail": "Entregador removido"}
     return JSONResponse(content=response_message, status_code=status.HTTP_200_OK)
 
+# ------------------------ Rotas /Entregas ------------------------ #
 
 @app.post('/entregas', response_model=Entrega, status_code=status.HTTP_201_CREATED)
-def criar_entrega(id: Entrega, db: Session = Depends(get_db)):
-    id_temp = RepositorioEntregas(db).criar(id)
+def criar_entrega(entrega: Entrega, db: Session = Depends(get_db)):
+    entrega_temp = RepositorioEntregas(db).criar(entrega)
     response_message = {"detail": "Entrega criada com sucesso"}
     return JSONResponse(content=response_message, status_code=status.HTTP_201_CREATED)
 
 
 @app.get('/entregas/{emailEntregador}', response_model=list[Entrega], status_code=status.HTTP_200_OK)
-def acessar_entregas(db: Session = Depends(get_db)):
+def acessar_entregas(emailEntregador: str, db: Session = Depends(get_db)):
     repo = RepositorioEntregas(db)
-    entregas = repo.relatorio()
+    entregas = repo.relatorio(emailEntregador)
     return entregas
+
 
 
 @app.post("/submit_review")

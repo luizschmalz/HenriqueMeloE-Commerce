@@ -1,4 +1,5 @@
 <template>
+  <Navegacao :email="email" />
   <div class="pagina-entregador">
     <div class="entregador-box">
       <h1 class="page-title">Detalhes do Entregador</h1>
@@ -21,6 +22,11 @@
   </div>
 </template>
 
+
+<script setup>
+import Navegacao from '../components/navegacaoEntregador.vue';
+</script>
+
 <script>
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -41,7 +47,7 @@ export default {
 
   async mounted() {
   const router = useRouter();
-  const email = this.$route.params.email; 
+  const email = this.$route.params.email || this.$route.params.id;
 
   if (email) {
     try {

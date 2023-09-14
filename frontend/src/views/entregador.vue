@@ -105,7 +105,6 @@ const signUp = async () => {
   if (!response.ok) {
     const responseData = await response.json();
     alert(`${responseData.detail}`);
-    console.log("arroz")
   }
   else {
     alert(JSON.stringify(formData.value));

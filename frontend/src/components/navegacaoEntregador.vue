@@ -1,37 +1,37 @@
+<template>
+  <header class="header">
+    <button @click="toHome" type="button" class="logo">Henrique Melo E-commerce</button>
+
+    <div class="navbar">
+      <div class="dropdown">
+        <button @click="toggleDropdown" class="dropdown-btn">Entregas</button>
+        <div v-show="showDropdown" class="dropdown-content">
+          <router-link :to="`/entregaEntregador/${email}`">Detalhes das Entregas</router-link>
+        </div>
+      </div>
+    </div>
+  </header>
+</template>
+
 <script setup>
+import { ref, defineProps } from 'vue';
 import { useRouter } from 'vue-router';
 
+const { email } = defineProps(['email']);
 const router = useRouter();
-
-const toCart = () => {
-  router.push('/cart');
-};
+const showDropdown = ref(false);
 
 const toHome = () => {
   router.push('/');
 };
 
-const toEntregador = () => {
-  router.push('/entregador');
-};
-
-const toEntregas = () => {
-  router.push('/entregas');
-};
-
-const toLoja = () => {
-  router.push('/lojas');
-};
-const toParcerias = () => {
-  router.push('/loginadm');
-};
-const toReview = () => {
-  router.push('/review')
+const toggleDropdown = () => {
+  showDropdown.value = !showDropdown.value;
 };
 </script>
-
-
-<style>
+ 
+  
+  <style scoped>
 *{
     margin: 0;
     padding: 0;
@@ -46,25 +46,7 @@ body {
   max-height: 100%; 
   background: url('../components/imagens/cool-background.png');
   
-  
-
 }
-
-/*.header{
-    width: 100%;
-    height: 60px;
-    background-color: #000;
-    color: #fff;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 999;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 50px;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
-}ideia da lenda GITHUB copilot*/
 
 .header{
   height: 60px;
@@ -147,34 +129,47 @@ body {
 .navbar button:hover::before{
   width: 100%;
 }
-
-
-
-
-</style>
-
-
-
-<template>
-  <body>
-    <header class="header">
-    
-    <button @click="toHome" type="button" class="logo">Henrique Melo E-commerce </button>
-    
-    <nav class="navbar">
-        <button @click="toParcerias" type="button">Administração </button>
-        <button @click="toCart" type="button">Carrinho </button>
-        <button @click="toReview" type="button">Reviews</button>
-        <button @click="toEntregador" type="button">Entregador</button>
-        <button @click="toEntregas" type="button">Entrega</button>
-        <button @click="toLoja" type="button">Loja </button>
-    </nav>
-
-  </header>
-    
-  </body>
-</template>
-
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 26.5px;
+    font-weight: 500;
+    margin-left: 30px;
+    transition: all 0.3s ease;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: #000;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  </style>
+  
 <style scoped>
 *{
     margin: 0;

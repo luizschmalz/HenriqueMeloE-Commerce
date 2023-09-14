@@ -6,9 +6,15 @@ const router = useRouter();
 const toCart = () => {
   router.push('/cart');
 };
+
 const toHome = () => {
   router.push('/');
 };
+
+const toEntregador = () => {
+  router.push('/entregador');
+};
+
 </script>
 
 
@@ -146,6 +152,7 @@ body {
     <nav class="navbar">
         <button @click="toHome" type="button">Home </button>
         <button @click="toCart" type="button">Carrinho</button>
+        <button @click="toEntregador" type="button">Entregador</button>
         <a href="">Lojas </a>
     </nav>
 

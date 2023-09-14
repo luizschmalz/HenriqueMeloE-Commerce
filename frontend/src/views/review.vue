@@ -1,6 +1,6 @@
 <script setup>
 import { useRouter } from 'vue-router';
-import navegacao from '../components/navegacaotranparent.vue';
+import navegacao from '../components/navegacao.vue';
 const router = useRouter();
 
 const toSubmitReview = () => {

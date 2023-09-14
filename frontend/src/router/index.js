@@ -10,6 +10,9 @@ import mockpagloja from '../views/mockpagloja.vue'
 import parcerias from '../views/parcerias.vue'
 import admparcerias from '../views/admparcerias.vue'
 import loginadm from '../views/loginadmparcerias.vue'
+import review from '../views/review.vue' 
+import submit_review from '../views/submit_review.vue'
+
 
 const router = createRouter({
     history: createWebHistory(),
@@ -70,6 +73,17 @@ const router = createRouter({
             name: 'pagloja',
             component: mockpagloja
         },
+        {
+            path: '/review',
+            name: 'review',
+            component: review
+        },
+        {
+            path: '/submit_review',
+            name: 'submit_review',
+            component: submit_review
+        },
+        
     ]
 })
 

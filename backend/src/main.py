@@ -167,6 +167,14 @@ class RepositorioEntregadores():
     def check_entregador(self, email: str):
         return self.db.query(Entregadores).filter(Entregadores.email == email).first() is not None
     
+    def retornar(self, email: str):
+        entregador = self.db.query(Entregadores).filter(Entregadores.email == email).first()
+        
+        if entregador is not None:
+            return entregador
+        else:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'Erro na realização de login com {email}')
+        
     def criar(self, entregador: Entregador):
         if self.check_entregador(entregador.email):
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f'Erro no cadastro do email {entregador.email}')
@@ -456,11 +464,11 @@ def criar_entregador(entregador: Entregador, db: Session = Depends(get_db)):
     return JSONResponse(content=response_message, status_code=status.HTTP_201_CREATED)
 
 
-@app.get('/entregadores', response_model=list[Entregador], status_code=status.HTTP_200_OK)
-def acessar_entregadores(db: Session = Depends(get_db)):
+@app.get('/entregadores/{email}', response_model=Entregador, status_code=status.HTTP_200_OK)
+def acessar_entregadores(email: str, db: Session = Depends(get_db)):
     repo = RepositorioEntregadores(db)
-    entregadores = repo.relatorio()
-    return entregadores
+    entregador = repo.retornar(email)
+    return entregador
 
 
 @app.put('/entregadores/{email}', response_model=Entregador)

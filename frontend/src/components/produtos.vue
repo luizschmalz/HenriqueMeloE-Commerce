@@ -1,11 +1,11 @@
 <template>
   <div class="secao">
-    <div class="tituloprod">Lorem ipsum dolor sit amet consectetur adipis.</div>
+    <div class="tituloprod">Os queridinhos dos nossos clientes</div>
     <div class="produtos-container">
       <div class="produtos"><img class="moldura" src="../components/imagens/pc gamer.png" alt="Descrição da imagem" width="200" height="200"></div>
-      <div class="produtos"><img class="moldura" src="../components/imagens/other-product.png" alt="Descrição da imagem" width="200" height="200"></div>
-      <div class="produtos"><img class="moldura" src="../components/imagenspc gamer.png" alt="Descrição da imagem" width="200" height="200"></div>
-      <div class="produtos"><img class="moldura" src="../components/imagensother-product.png" alt="Descrição da imagem" width="200" height="200"></div>
+      <div class="produtos"><img class="moldura" src="../components/imagens/product1-image.jpg" alt="Descrição da imagem" width="200" height="200"></div>
+      <div class="produtos"><img class="moldura" src="../components/imagens/dualsense5.webp" alt="Descrição da imagem" width="200" height="200"></div>
+      <div class="produtos"><img class="moldura" src="../components/imagens/iphone.webp" alt="Descrição da imagem" width="200" height="200"></div>
       <!-- Add more "produtos" elements as needed -->
     </div>
   </div>
@@ -13,7 +13,7 @@
     <div class="tituloprod">Featured itens</div>
     <div class="bannercontainer">
       <div class="produtosbannerred"><img class="moldurabanner" src="../components/imagens/pc gamer.png" alt="Descrição da imagem" width="400" height="400">Pc Gamer Pichau</div>
-      <div class="produtosbannergreen"><img class="moldurabanner" src="../components/imagens/karambit.png" alt="Descrição da imagem" width="400" height="400">Fake Natty Plus</div>
+      <div class="produtosbannergreen"><img class="moldurabanner" src="../components/imagens/karambit.png" alt="Descrição da imagem" width="400" height="400">Karambit do Henrique Melo</div>
     </div>
   </div>
 </template>
@@ -58,6 +58,10 @@
     font-size: 40px;
     font-weight: 600;
     margin: 0 10px; /* Add some spacing between "produtos" elements */
+    transition: transform 0.3s ease-in-out; /* Add a smooth transition */
+  }
+  .produtos:hover {
+    transform: scale(1.05); /* Scale up the image on hover for a cool effect */
   }
   .produtosbannerred{
       background-color: transparent;
@@ -71,6 +75,7 @@
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Add a shadow effect */
       transition: transform 0.3s ease-in-out; /* Add a smooth transition */
   }
+
   .produtosbannergreen{
       background-color: transparent;
       width: 450px;

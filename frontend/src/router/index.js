@@ -7,6 +7,9 @@ import meuscartoes from '../views/meuscartoes.vue'
 import login from '../views/login.vue'
 import cadastro from '../views/cadastro.vue'
 import mockpagloja from '../views/mockpagloja.vue'
+import parcerias from '../views/parcerias.vue'
+import admparcerias from '../views/admparcerias.vue'
+import loginadm from '../views/loginadmparcerias.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -35,6 +38,22 @@ const router = createRouter({
             path: '/meuscartoes',
             name: 'meuscartoes',
             component: meuscartoes
+        },
+        {
+            path: '/parcerias',
+            name: 'parcerias',
+            component: parcerias
+        },
+        {
+            path: '/loginadm',
+            name: 'loginadm',
+            component: loginadm
+
+        },
+        {
+            path: '/admparcerias',
+            name: 'admparcerias',
+            component: admparcerias
         },
         {
             path: '/lojas',

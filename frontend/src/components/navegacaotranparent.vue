@@ -23,6 +23,7 @@ const toParcerias = () => {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    position: sticky;
     
 
 }
@@ -31,8 +32,6 @@ body {
   min-height: 10vh;
   max-width: 100%;
   max-height: 100%; 
-  background: url('../components/imagens/cool-background.png');
-  
   
 
 }
@@ -65,7 +64,7 @@ body {
   align-items: center;
   background-color: transparent;
   padding: 20px 100px;
-  z-index: 321312312; /* z-index é meio que a prioridade desse testo */
+  z-index: 1; /* z-index é meio que a prioridade desse testo */
 }
 
 .logo{
@@ -173,7 +172,6 @@ body {
   min-height: 10vh;
   max-width: 100%;
   max-height: 100%; 
-  background: url('../components/imagens/cool-background.png');
   
   
 

@@ -91,7 +91,7 @@
         },
       });
       if (response.ok) {
-        // Remove the deleted coupon from the list
+      
         discountCoupons.value = discountCoupons.value.filter((coupon) => coupon.nome !== nomeCupom);
       } else {
         console.error('Failed to delete coupon.');
@@ -102,12 +102,10 @@
   };
   
   const editCoupon = (coupon) => {
-    // Set the 'editing' property to true for the selected coupon
     coupon.editing = true;
   };
   
   const updateCoupon = async (coupon) => {
-    // Update the coupon information on the server
     try {
       const response = await fetch(`http://localhost:8000/cupom/${coupon.nome}`, {
         method: 'PUT',
@@ -120,15 +118,14 @@
         }),
       });
       if (response.ok) {
-        // Update the local coupon data and reset 'editing' property
         coupon.nome = coupon.editedNome;
         coupon.desconto = coupon.editedDesconto;
         coupon.editing = false;
       } else {
-        console.error('Failed to update coupon.');
+        alert("Insira um valor válido");
       }
     } catch (error) {
-      console.error('Error while updating coupon:', error);
+      console.error('Error while updating coupon:', error); // teoricamente esse erro não deveria acontecer
     }
   };
   
@@ -137,8 +134,7 @@
   });
   </script>
   
-  <style scoped>
-  /* Add some styles for the edit form */
+  <style>
   .edit-button{
     margin-right: 10px;
   }
@@ -172,8 +168,6 @@
   .update-button:hover {
     background-color: #0056b3;
   }
-  
-  /* Adjust the styles for the coupon name and discount */
   .coupon-info {
     display: flex;
     flex-direction: column;
@@ -182,6 +176,7 @@
   }
   
   .coupon-name {
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 5px;
@@ -192,10 +187,6 @@
     font-size: 16px;
     color: #555;
   }
-  </style>
-  
-  
-  <style scoped>
   .tituloempresa {
   font-size: 60px;
   font-weight: 700;
@@ -214,24 +205,17 @@
   .business-text{
     margin: 0px 30px;
     padding: 0;
-    font-family: 'ZZYZX', sans-serif;
     box-sizing: border-box;
     flex-direction: column;
 
     }
-    @font-face {
-    font-family: ZZYZX;
-    src: url(../components/fonts/ZZYZX.TTF);
-    }
     .screen {
         display: flex;
         justify-content: space-between;
-        align-items: flex-start; /* Align items to the top */
+        align-items: flex-start; 
         position: relative;
-        position: absolute; /* Make it a positioning context for pseudo-element */
+        position: absolute; 
     }
-
-/* Add a pseudo-element to create the background layer */
     .screen::before {
         content: '';
         position: absolute;
@@ -239,8 +223,8 @@
         left: 0;
         width: 100%;
         height: 1080px;
-        background: url('../components/imagens/cool-background.png'); /* Adjust background color and opacity */
-        z-index: -1; /* Place it below other content */
+        background: url('../components/imagens/cool-background.png');
+        z-index: -1;
         }
   
   .page-title {
@@ -282,8 +266,8 @@
   }
   
   .coupon-list {
-    max-width: 70%; /* Adjust this value to your preference */
-    width: 30%; /* Make the coupon list take full width */
+    max-width: 70%; 
+    width: 30%;
     height: 100%;
     padding: px;
     margin-left: 90px;
@@ -333,4 +317,3 @@
     text-align: justify;
   }
   </style>
-  

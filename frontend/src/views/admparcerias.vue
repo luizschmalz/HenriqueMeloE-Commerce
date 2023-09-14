@@ -1,4 +1,5 @@
 <template>
+  <navegacao/>
   <div class="coupon-form">
     <h1 class="page-title">Add Coupon</h1>
     <form @submit.prevent="addCoupon">
@@ -35,6 +36,7 @@
 </template>
 
 <script setup>
+import navegacao from "../components/navegacao.vue"
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -56,7 +58,7 @@ const addCoupon = async () => {
   })
 
   if (!response.ok) {
-    alert("Coupon already exists in our database. Please try again.");
+    alert("Erro ao adicionar cupom");
   } else {
     const responseData = await response.json();
     successMessage.value = responseData.message;

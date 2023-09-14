@@ -264,8 +264,8 @@ class RepositorioCupoms():
         return self.db.query(cupom_desconto).filter(cupom_desconto.nome == nome).first() is not None
     
     def criar(self, cupom: discount_coupom):
-        if self.check_cupom(cupom.nome):
-            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Cupom já registrado")
+        if self.check_cupom(cupom.nome) or cupom.desconto > 100 or cupom.desconto < 1:
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Erro")
         
         db_cupom = cupom_desconto(nome=cupom.nome, desconto=cupom.desconto)
         self.db.add(db_cupom)
@@ -276,10 +276,14 @@ class RepositorioCupoms():
     def atualizar(self, nome: str, cupom: discount_coupom):
         existing_coupom = self.db.query(cupom_desconto).filter(cupom_desconto.nome == nome).first()
         existing_coupom.nome = cupom.nome
-        existing_coupom.desconto = cupom.desconto
-        self.db.commit()
-        self.db.refresh(existing_coupom)
-        return existing_coupom
+        if cupom.desconto < 101 and cupom.desconto > 0:
+            existing_coupom.desconto = cupom.desconto
+            self.db.commit()
+            self.db.refresh(existing_coupom)
+            return existing_coupom
+        else:
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Cupom já registrado")
+
     
     def remover(self, nome: str):
         cupom_remover = self.db.query(cupom_desconto).filter(cupom_desconto.nome == nome).first()

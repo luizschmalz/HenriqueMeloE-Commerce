@@ -9,7 +9,7 @@
           id="nome"
           name="nome"
           v-model="formData.nome"
-          placeholder="Enter your name"
+          placeholder="Enter coupon name"
           required
           data-cy="input-nome"
         />
@@ -28,12 +28,11 @@
       </div>
       <button type="submit" class="submit-button" data-cy="submit-button">Add Coupon</button>
     </form>
-    <div v-if="successMessage" class="success-message" data-cy="success-message"> <!-- Adicionado data-cy para identificar a mensagem de sucesso -->
+    <div v-if="successMessage" class="success-message" data-cy="success-message">
       {{ successMessage }}
     </div>
   </div>
 </template>
-
 
 <script setup>
 import { ref } from 'vue';
@@ -57,7 +56,7 @@ const addCoupon = async () => {
   })
 
   if (!response.ok) {
-    alert("Parceiro já existente em nosso banco de dados, tente novamente.");
+    alert("Coupon already exists in our database. Please try again.");
   } else {
     const responseData = await response.json();
     successMessage.value = responseData.message;
@@ -66,6 +65,7 @@ const addCoupon = async () => {
   }
 };
 </script>
+
 
 <style scoped>
 .page-title {

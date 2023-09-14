@@ -15,6 +15,10 @@ const toEntregador = () => {
   router.push('/entregador');
 };
 
+const toEntregas = () => {
+  router.push('/entregas');
+};
+
 const toLoja = () => {
   router.push('/lojas');
 };
@@ -162,6 +166,7 @@ body {
         <button @click="toCart" type="button">Carrinho </button>
         <button @click="toReview" type="button">Reviews</button>
         <button @click="toEntregador" type="button">Entregador</button>
+        <button @click="toEntregas" type="button">Entrega</button>
         <button @click="toLoja" type="button">Loja </button>
     </nav>
 

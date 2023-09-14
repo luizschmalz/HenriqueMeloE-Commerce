@@ -1,4 +1,5 @@
 <template>
+  <Navegacao/>
   <div class="pagina-entregador">
     <div class="entregador-box">
       <h1 class="page-title">Detalhes do Entregador</h1>
@@ -20,6 +21,11 @@
     </div>
   </div>
 </template>
+
+
+<script setup>
+import Navegacao from '../components/navegacaoEntregador.vue';
+</script>
 
 <script>
 import { onMounted, ref } from 'vue';

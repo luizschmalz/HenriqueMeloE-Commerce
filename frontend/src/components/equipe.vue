@@ -3,7 +3,6 @@
 
 <template>
     <div class="posicao">
-        
         <div class="title-container">
             <h1 class="title">Sobre nós</h1>
         </div>
@@ -50,7 +49,7 @@
         <div class="containerequipe">
                     <!-- Team Member 1 -->
                     <div class="integrante">
-                        <img src="../components/imagens/brenda.webp" alt="">
+                        <img src="../components/imagens/brenda.jpg" alt="">
                         <div class="info-container">
                         <h1>Brenda<br><span>Guerra</span></h1>
                         <a href="https://www.instagram.com/brenda.guerra_/" target="_blank">Sobre mim</a>

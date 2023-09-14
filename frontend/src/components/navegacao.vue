@@ -6,9 +6,15 @@ const router = useRouter();
 const toCart = () => {
   router.push('/cart');
 };
+
 const toHome = () => {
   router.push('/');
 };
+
+const toEntregador = () => {
+  router.push('/entregador');
+};
+
 const toLoja = () => {
   router.push('/lojas');
 };
@@ -155,6 +161,7 @@ body {
         <button @click="toParcerias" type="button">Administração </button>
         <button @click="toCart" type="button">Carrinho </button>
         <button @click="toReview" type="button">Reviews</button>
+        <button @click="toEntregador" type="button">Entregador</button>
         <button @click="toLoja" type="button">Loja </button>
     </nav>
 

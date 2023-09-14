@@ -60,7 +60,7 @@ const router = useRouter();
 const selectedCard = computed(() => store.state.creditCards.selectedCard);
 
 // Use a computed property to get the selected credit card from the store
-import navegacao from '../components/navegacaotranparent.vue';
+import navegacao from '../components/navegacao.vue';
 import { ref } from 'vue';
 
 const selectCreditCard = (card) => {

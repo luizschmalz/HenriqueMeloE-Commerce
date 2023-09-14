@@ -15,6 +15,9 @@ const toLoja = () => {
 const toParcerias = () => {
   router.push('/loginadm');
 };
+const toReview = () => {
+  router.push('/review')
+};
 </script>
 
 
@@ -148,9 +151,9 @@ body {
     <button @click="toHome" type="button" class="logo">Henrique Melo E-commerce </button>
     
     <nav class="navbar">
-        <button @click="toHome" type="button">Home </button>
         <button @click="toParcerias" type="button">Administração </button>
         <button @click="toCart" type="button">Carrinho </button>
+        <button @click="toReview" type="button">Reviews</button>
         <button @click="toLoja" type="button">Loja </button>
     </nav>
 

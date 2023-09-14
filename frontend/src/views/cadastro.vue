@@ -34,9 +34,6 @@
                 <div class = "divdeinputs">
                     <button class="botaologin" @click="toLogin" type="button">Ir para Login</button>
                 </div>
-                <div class = "divdeinputs">
-                    <button class="botaologin" @click="toHome" type="button">Voltar para home</button>
-                </div>
             </form>
         </div>
     </div>
@@ -126,7 +123,7 @@ const deleteLoja = async () => {
     #cadastro{
         background-image: url("C:\Users\luize\.vscode\luize\HenriqueMeloE-Commerce\frontend\src\components\imagens\background image reverse.jpg");
         width: 800px;
-        height: 1100px;
+        height: 1000px;
         display: flex;
         flex-direction: column;
         align-items: center; 

@@ -1,6 +1,6 @@
 <script setup>
 import { useRouter } from 'vue-router';
-
+import navegacao from '../components/navegacaotranparent.vue';
 const router = useRouter();
 
 const toSubmitReview = () => {
@@ -10,7 +10,8 @@ const toSubmitReview = () => {
 </script>
 
 <template>
-  <div>
+  <navegacao />
+  <div class>
     <h1 class="page-title">Reviews</h1>
 
     <div class="add">

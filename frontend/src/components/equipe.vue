@@ -20,10 +20,10 @@
         <div class="containerequipe">
                     <!-- Team Member 1 -->
                     <div class="integrante">
-                        <img src="../components/imagens/jiboia.jpg" alt="">
+                        <img src="../components/imagens/pepito.jpg" alt="">
                         <div class="info-container">
-                        <h1>Caio Possidio<br><span>A lenda</span></h1>
-                        <a href="https://www.instagram.com/possidiocaio/" target="_blank">Sobre mim</a>
+                        <h1>Pedro Calheiros</h1>
+                        <a href="https://www.instagram.com/pedrocalheiross" target="_blank">Sobre mim</a>
                         </div>
                     </div>
                 </div>
@@ -40,10 +40,10 @@
         <div class="containerequipe">
                     <!-- Team Member 1 -->
                     <div class="integrante">
-                        <img src="../components/imagens/tbroq.webp" alt="">
+                        <img src="../components/imagens/mast.jpg" alt="">
                         <div class="info-container">
-                        <h1>Luiz Eduardo Freitas<br><span>Von Schmalz</span></h1>
-                        <a href="https://www.instagram.com/luizschmalz/" target="_blank">Sobre mim</a>
+                        <h1>Matheus Braga</h1>
+                        <a href="https://www.instagram.com/mastbraga/" target="_blank">Sobre mim</a>
                     </div>
                     </div>
                 </div>

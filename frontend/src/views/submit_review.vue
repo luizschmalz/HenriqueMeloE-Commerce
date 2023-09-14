@@ -1,4 +1,5 @@
 <template>
+  <navegacao />
     <div class="submit-review-page">
       <div class="credit-card-form">
         <h1 class="page-title">Add Review</h1>
@@ -54,7 +55,7 @@
   </template>
   
   <script setup>
-  
+  import navegacao from '../components/navegacaotranparent.vue';
   import { ref } from 'vue';
   import { useRouter } from 'vue-router';
   

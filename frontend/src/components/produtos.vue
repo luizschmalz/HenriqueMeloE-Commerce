@@ -13,7 +13,7 @@
     <div class="tituloprod">Featured itens</div>
     <div class="bannercontainer">
       <div class="produtosbannerred"><img class="moldurabanner" src="../components/imagens/pc gamer.png" alt="Descrição da imagem" width="400" height="400">Pc Gamer Pichau</div>
-      <div class="produtosbannergreen"><img class="moldurabanner" src="../components/imagens/karambit.png" alt="Descrição da imagem" width="400" height="400">Fake Natty Plus</div>
+      <div class="produtosbannergreen"><img class="moldurabanner" src="../components/imagens/karambit.png" alt="Descrição da imagem" width="400" height="400">Karambit do Henrique Melo</div>
     </div>
   </div>
 </template>

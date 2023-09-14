@@ -57,9 +57,8 @@
                     </div>
                     </div>
                 </div>
-        <div class="textoequipe">  
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-            
+        <div class="textoequipe">    
+            <p>Essa é a nossa equipe, somos o grupo que se juntou para fazer esse site, espero que gostem!</p>
         </div>
     </div>
 </template>
@@ -78,7 +77,7 @@
     src: url(../components/fonts/ZZYZX.TTF);
 }
 .textoequipe{
-    color: #fff;
+    color: #000000;
     font-size: 32px;
     text-align: center;
     margin-top: 50px;

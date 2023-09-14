@@ -1,5 +1,6 @@
 
 <template>
+    <navegacao/>
     <div class="Cadastro">
         <p id="textoprim">Cadastro de Lojas</p>
         <div class="title-container">
@@ -42,6 +43,7 @@
 </template>
 
 <script setup>
+import navegacao from '../components/navegacao.vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 

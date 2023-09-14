@@ -25,7 +25,7 @@
         <!-- Second line of products -->
         <div class="product-row">
           <img class="moldura" src="../components/imagens/pc gamer.png" alt="Descrição da imagem" width="200" height="200">
-          <img class="moldura" src="../components/imagens/one piece.png" alt="Descrição da imagem" width="200" height="200">
+          <img class="moldura" src="../components/imagens/camisahenrique.png" alt="Descrição da imagem" width="200" height="200">
           <span>
             <img class="moldura" src="../components/imagens/pc.png" alt="Descrição da imagem" width="200" height="200">
           </span>

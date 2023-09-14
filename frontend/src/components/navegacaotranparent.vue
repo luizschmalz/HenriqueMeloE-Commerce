@@ -6,15 +6,9 @@ const router = useRouter();
 const toCart = () => {
   router.push('/cart');
 };
-
 const toHome = () => {
   router.push('/');
 };
-
-const toEntregador = () => {
-  router.push('/entregador');
-};
-
 const toLoja = () => {
   router.push('/lojas');
 };
@@ -32,6 +26,7 @@ const toReview = () => {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    position: sticky;
     
 
 }
@@ -40,8 +35,6 @@ body {
   min-height: 10vh;
   max-width: 100%;
   max-height: 100%; 
-  background: url('../components/imagens/cool-background.png');
-  
   
 
 }
@@ -74,7 +67,7 @@ body {
   align-items: center;
   background-color: transparent;
   padding: 20px 100px;
-  z-index: 321312312; /* z-index é meio que a prioridade desse testo */
+  z-index: 1; /* z-index é meio que a prioridade desse testo */
 }
 
 .logo{
@@ -161,7 +154,6 @@ body {
         <button @click="toParcerias" type="button">Administração </button>
         <button @click="toCart" type="button">Carrinho </button>
         <button @click="toReview" type="button">Reviews</button>
-        <button @click="toEntregador" type="button">Entregador</button>
         <button @click="toLoja" type="button">Loja </button>
     </nav>
 
@@ -183,7 +175,6 @@ body {
   min-height: 10vh;
   max-width: 100%;
   max-height: 100%; 
-  background: url('../components/imagens/cool-background.png');
   
   
 

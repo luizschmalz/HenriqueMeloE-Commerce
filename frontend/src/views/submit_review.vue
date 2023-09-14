@@ -82,7 +82,7 @@
     })
     
     if (!response.ok) {
-      alert("Error");
+      alert("Avaliações devem ser entre 1 e 5 estrelas");
     }
     else {
       alert(JSON.stringify(formData.value));
@@ -100,29 +100,34 @@
   }
   
   .credit-card-form {
-    background-color: #fff;
+    background-image: url("C:\Users\Pichau\Dev\HenriqueMeloE-Commerce\frontend\src\components\imagens\background image reverse.jpg");
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
     border-radius: 10px;
-    width: 300px;
+    width: 500px;
+    height: 700px;
   }
   
   .page-title {
      font-size :24px; 
      text-align :center; 
      margin-bottom :20px; 
-     color :#333; 
+     color : white; 
+     font-weight: bold;
   }
   
   .form-group {
-     margin-bottom :15px; 
+    margin-top: 50px;
+     margin-bottom :50px; 
   }
   
   label {
+     margin-top: 10px;
      font-size :16px; 
      display :block; 
-     margin-bottom :5px; 
-     color :#555; 
+     margin-bottom :10px; 
+     color : white;
+     font-weight: bold; 
   }
   
   input[type='text'] {
@@ -135,7 +140,7 @@
   }
   
   .submit-button {
-     background-color:#007bff; 
+     background-color:gray; 
      color:#fff; 
      border:none; 
      border-radius :5px; 
@@ -147,6 +152,6 @@
   }
   
   .submit-button:hover {
-     background-color:#0056b3; 
+     background-color:transparent; 
   }
   </style>

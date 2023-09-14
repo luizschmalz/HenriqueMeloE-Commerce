@@ -11,10 +11,10 @@ const toSubmitReview = () => {
 
 <template>
   <navegacao />
-  <div class>
+  <div class="add">
     <h1 class="page-title">Reviews</h1>
 
-    <div class="add">
+    <div class>
       <button class="botao" @click="toSubmitReview">Adicionar uma review</button>
     </div>
 
@@ -89,15 +89,17 @@ export default {
 <style scoped>
 .add {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin-top: 30px;
 }
 
 .botao {
+  margin-top: 30px;
   display: flex;
   justify-content: center;
   padding: 8px 20px;
-  background: linear-gradient(315deg, #00ccff, #d400d4);
+  background: rgb(93, 93, 93);
   border-radius: 20px;
   text-decoration: none;
   color: #fff;
@@ -109,31 +111,37 @@ export default {
 }
 
 .botao:hover {
-  background: linear-gradient(315deg, #00ccff, #d400d4);
+  background-image:url("C:\Users\Pichau\Dev\HenriqueMeloE-Commerce\frontend\src\components\imagens\background image reverse.jpg");
   transform: scale(1.05);
   transition: 0.5s;
 }
 
 .page-title {
-  display: flex;
   text-align: center;
-  justify-content: center;
   width: 200px;
-  font-weight: 500;
+  font-weight:bold;
   letter-spacing: 0.05em;
+  font-size: xx-large;
   text-transform: uppercase;
 }
 
 .form-group {
+  justify-content: center;
   margin-top: 20px;
 }
 
 .form-group label {
-  display: block;
+  margin-left: 200px;
+  text-align: center;
+  width: 200px;
+  margin-top: 30px;
   font-weight: bold;
+  font-size: x-large;
+  margin-bottom: 30px;
 }
 
 .form-group input {
+  margin-top: 20px;
   width: 100%;
   padding: 10px;
   border: 1px solid #ddd;
@@ -144,7 +152,7 @@ export default {
   display: block;
   margin-top: 20px;
   padding: 10px 20px;
-  background: linear-gradient(315deg, #00ccff, #d400d4);
+  background:rgb(93, 93, 93);;
   border: none;
   border-radius: 20px;
   color: #fff;
@@ -156,10 +164,14 @@ export default {
 }
 
 .submit-button:hover {
-  background: linear-gradient(315deg, #00ccff, #d400d4);
+  background-image:url("C:\Users\Pichau\Dev\HenriqueMeloE-Commerce\frontend\src\components\imagens\background image reverse.jpg");
+  transform: scale(1.05);
+  transition: 0.5s;
 }
 
 .review-item {
+  margin:auto;
+  width: 800px;
   background-color: #f5f5f5;
   border: 1px solid #ddd;
   padding: 10px;
@@ -175,6 +187,7 @@ export default {
 .review-info {
   display: flex;
   flex-direction: column;
+  
 }
 
 .review-user {
@@ -185,12 +198,12 @@ export default {
 
 .review-company {
   font-size: 14px;
-  color: #777;
+  color: #565656;
 }
 
 .review-stars {
   font-size: 14px;
-  color: #777;
+  color: #565656;
 }
 
 .review-comment {

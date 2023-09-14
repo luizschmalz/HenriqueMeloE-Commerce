@@ -32,7 +32,7 @@
                     <div class="integrante">
                         <img src="../components/imagens/luiz.jpg" alt="">
                         <div class="info-container">
-                        <h1>Luiz Eduardo Freitas<br><span>Von Schmalz</span></h1>
+                        <h1>Luiz Eduardo<br><span>Schmalz</span></h1>
                         <a href="https://www.instagram.com/luizschmalz/" target="_blank">Sobre mim</a>
                     </div>
                     </div>

@@ -1,4 +1,5 @@
 <template>
+    <navegacao/>
     <div class ='tudo'>
         <h1 class="tittle">BEM VINDO A SUA LOJA</h1>
         <div class="infos">
@@ -21,8 +22,11 @@
     </div>
 </template>
 
-<script>
+
+<script setup>
+import navegacao from '../components/navegacao.vue';
 </script>
+
 
 <style scoped>
 
@@ -47,13 +51,15 @@
 
 .infos2{
     width: 500px;
-    background-color: aqua;
+    background-image: url("C:\Users\luize\.vscode\luize\HenriqueMeloE-Commerce\frontend\src\components\imagens\background image reverse.jpg");
+    border-color: #222;
+    border-radius: 20px;
     margin-left: 100px;
     height: 800px;
     font-weight: bold;
     margin-bottom: 15px;
     font-size: x-large;
-    color: #222;
+    color: white;
     padding: 5px 10px;
     text-align: center;
 }

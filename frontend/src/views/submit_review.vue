@@ -55,7 +55,7 @@
   </template>
   
   <script setup>
-  import navegacao from '../components/navegacaotranparent.vue';
+  import navegacao from '../components/navegacao.vue';
   import { ref } from 'vue';
   import { useRouter } from 'vue-router';
   

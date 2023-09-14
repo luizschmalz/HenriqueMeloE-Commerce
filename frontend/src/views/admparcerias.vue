@@ -11,6 +11,7 @@
           v-model="formData.nome"
           placeholder="Enter your name"
           required
+          data-cy="input-nome"
         />
       </div>
       <div class="form-group">
@@ -22,15 +23,17 @@
           v-model="formData.desconto"
           placeholder="Enter discount amount"
           required
+          data-cy="input-desconto" 
         />
       </div>
-      <button type="submit" class="submit-button">Add Coupon</button>
+      <button type="submit" class="submit-button" data-cy="submit-button">Add Coupon</button>
     </form>
-    <div v-if="successMessage" class="success-message">
+    <div v-if="successMessage" class="success-message" data-cy="success-message"> <!-- Adicionado data-cy para identificar a mensagem de sucesso -->
       {{ successMessage }}
     </div>
   </div>
 </template>
+
 
 <script setup>
 import { ref } from 'vue';

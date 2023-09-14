@@ -52,8 +52,8 @@
                     <div class="integrante">
                         <img src="../components/imagens/brenda.webp" alt="">
                         <div class="info-container">
-                        <h1>Luiz Eduardo Freitas<br><span>Von Schmalz</span></h1>
-                        <a href="https://www.instagram.com/luizschmalz/" target="_blank">Sobre mim</a>
+                        <h1>Brenda<br><span>Guerra</span></h1>
+                        <a href="https://www.instagram.com/brenda.guerra_/" target="_blank">Sobre mim</a>
                     </div>
                     </div>
                 </div>
